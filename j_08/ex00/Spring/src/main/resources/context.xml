@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id = "preProcessorToUpperImpl" class="preprocessor.PreProcessorToUpperImpl"/>
+    <bean id = "preProcessorToLowerImpl" class="preprocessor.PreProcessorToLowerImpl"/>
+
+    <bean id = "rendererErrImplUpper" class = "renderer.RendererErrImpl">
+        <constructor-arg name="preProcessor" ref = "preProcessorToUpperImpl"/>
+    </bean>
+    <bean id = "rendererStandardImplUpper" class = "renderer.RendererStandardImpl">
+        <constructor-arg name="preProcessor" ref = "preProcessorToUpperImpl"/>
+    </bean>
+    <bean id = "rendererErrImplLower" class = "renderer.RendererErrImpl">
+        <constructor-arg name="preProcessor" ref = "preProcessorToLowerImpl"/>
+    </bean>
+    <bean id = "rendererStandardImplLower" class = "renderer.RendererStandardImpl">
+        <constructor-arg name="preProcessor" ref = "preProcessorToLowerImpl"/>
+    </bean>
+
+
+    <bean id = "printerWithDateTimeErrUpper" class="printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererErrImplUpper"/>
+    </bean>
+    <bean id = "printerWithDateTimeStandUpper" class="printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImplUpper"/>
+    </bean>
+    <bean id = "printerWithDateTimeErrLower" class="printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererErrImplLower"/>
+    </bean>
+    <bean id = "printerWithDateTimeStandLower" class="printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImplLower"/>
+    </bean>
+
+
+    <bean id = "printerWithPrefixErrUpper" class="printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererErrImplUpper"/>
+        <property name="prefix" value="Prefix "/>
+    </bean>
+    <bean id = "printerWithPrefixStandUpper" class="printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImplUpper"/>
+        <property name="prefix" value="Prefix "/>
+    </bean>
+    <bean id = "printerWithPrefixErrLower" class="printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererErrImplLower"/>
+        <property name="prefix" value="Prefix "/>
+    </bean>
+    <bean id = "printerWithPrefixStandLower" class="printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImplLower"/>
+        <property name="prefix" value="Prefix "/>
+    </bean>
+
+</beans>
